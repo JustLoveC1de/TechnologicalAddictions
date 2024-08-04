@@ -1,0 +1,148 @@
+/*
+Шрифт: 'Inter'
+Цвета:
+1. Голубой = #5988FF
+2. Розовый = #FD98FB
+3. Салатовый = #D6FF6B
+4. Белый = #FFFFFF
+*/
+
+
+@keyframes strong-pink {
+  0% {
+    color: #FD98FB;
+    font-size: 19px;
+  }
+
+  50% {
+    color: #febefd;
+    font-size: 115%;
+  }
+
+  100% {
+    color: #FD98FB;
+    font-size: 19px;
+  }
+}
+
+
+@keyframes reveal {
+  0% {
+    color: #e0e0e0b7;
+  }
+
+  100% {
+    color: #5988FF;
+  }
+}
+
+
+@keyframes strong-aqua {
+  0% {
+    color: #5988FF;
+    font-size: 18px;
+  }
+
+  50% {
+    color: #b7ccff;
+    font-size: 110%;
+  }
+
+  100% {
+    color: #5988FF;
+    font-size: 18px;
+  }
+}
+
+#site-links li > a {
+  font-size: 18px;
+  color: #5988FF;
+  font-style: italic;
+}
+#site-links li > a:hover {
+  animation: strong-aqua 3s;
+}
+
+#facts span {
+  color: #e0e0e0b7;
+  font-size: 19px;
+  font-style: italic;
+}
+
+#facts span:hover {
+  animation-name: reveal; 
+  animation-duration: 3s; 
+  animation-fill-mode: forwards;
+}
+
+@keyframes strong-black {
+  0% {
+    color: #000000;
+    font-size: 19px;
+  }
+
+  50% {
+    color: #646464;
+    font-size: 115%;
+  }
+
+  100% {
+    color: #000000;
+    font-size: 19px;
+  }
+}
+
+
+
+body {
+  background: azure; /*used this website: https://cssgradient.io/*/
+  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+}
+
+strong {
+  font-size: 19px;
+}
+
+strong:hover {
+  animation: strong-black 3s;
+}
+
+.parent_embed {
+  padding: 20px 40px;
+  background: #D6FF6B;
+  border-radius: 34px;
+  margin: 0 0 24px 0;
+}
+
+.parent_embed ul {
+  margin: 10px 0;
+  list-style-type: disc;
+}
+
+.parent_embed li {
+  margin: 5px 0;
+}
+
+
+
+#rb_methods li > strong {
+  color: #FD98FB;
+}
+
+#rb_methods li > strong:hover {
+  animation: strong-pink 3s;
+}
+
+#adc_list * {
+  margin: 15px 0;
+}
+
+.embed {
+  padding: 10px 3%;
+  width: 60%;
+  background: white;
+  border-radius: 34px;
+  box-shadow: inset 9px 0px 18px rgb(0, 0, 0, 0.2);
+}
+

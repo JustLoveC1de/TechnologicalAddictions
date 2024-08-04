@@ -1,0 +1,3 @@
+﻿CITIES = "cities.example.txt" # Файл, в котором перечислены города.
+KEY = "insert_your_key_here" # Ключ для API https://openweathermap.org/
+DATABASE_NAME = "main.db"

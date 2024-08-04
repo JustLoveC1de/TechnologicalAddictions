@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="..\static\css\style.css">
+</head>
+<body>
+    <article class="parent_embed" id="adc_list">
+        <strong>Добро пожаловать на сайт!</strong>
+        <p>У нас имеется много всего. Осматривайтесь, не стесняйтесь!</p>
+    </article>
+    <article class="parent_embed">
+        <article class="embed" id="site-links">
+            <strong>Список ссылок сайта:</strong>
+            <ul style="list-style-type: '» ';">
+                <li>Возможно, вы хотите узнать <a href="{{ url_for('.show', page='addiction_info') }}">какие технологические зависимости существуют?</a></li>
+                <li>Возможно, вы хотите узнать <a href="{{ url_for('facts.random_facts')}}">какой-то новый случайный факт?</a></li>
+            </ul>
+        </article>
+    </article>
+</body>
+</html>

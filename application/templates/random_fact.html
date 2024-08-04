@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Случайный факт</title>
+    <link rel="stylesheet" href="..\static\css\style.css">
+</head>
+<body>
+    <article class="parent_embed">
+        <article class="embed" id="facts">
+            <strong>Интересные факты:</strong>
+            <ul>
+                {% for fact in random_facts %}
+                <li><p>{{ fact }}</p></li>
+                {% endfor %}
+            </ul>
+        </article>
+    </article>
+</body>
+</html>
