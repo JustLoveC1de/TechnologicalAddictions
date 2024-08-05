@@ -10,9 +10,18 @@ from application.web_api.data import (
     Geolocation,
     Weather
 )
-from application.threading_data import ThreadingData
-from sqlite3 import Cursor
-from requests import Response
+from application.data import (
+    get_db,
+    get_session
+)
+from sqlite3 import (
+    Cursor,
+    Row
+)
+from requests import (
+    Response,
+    Session
+)
 from flask import current_app
 import os.path as path
 
@@ -24,7 +33,8 @@ logger: Logger = getLogger(__name__)
 
 def generic_request(url: str, params: dict[str, str], *, method: str = 'GET') -> list[dict[str, Any]] | dict[str, Any]:
     """Отправка запроса к сайту и получение ответа от него в виде словаря (или списка словарей)."""
-    response: Response = ThreadingData.get_data("session").request(method, url, params=params, headers=current_app.config["SESSION"].headers)
+    session: Session = get_session()
+    response: Response = session.request(method, url, params=params, headers=session.headers)
     logger.debug(f"Успешно получили ответ от сайта {url}. {method}")
     return response.json()
     
@@ -32,9 +42,8 @@ def generic_request(url: str, params: dict[str, str], *, method: str = 'GET') ->
 def geocode(city: str) -> Geolocation:
     """Поиск информации о расположении города в базе данных, в случае отсутствия таковой - отправка запроса к https://openweathermap.org/ с целью
     получения географической широты и долготы."""
-    print(ThreadingData.data)
-    cursor: Cursor = ThreadingData.get_data("cursor")
-    query: Optional[tuple] = cursor.execute(
+    cursor: Cursor = get_db().cursor()
+    query: Optional[Row] = cursor.execute(
         '''
         SELECT
             ru,
@@ -44,10 +53,10 @@ def geocode(city: str) -> Geolocation:
             geolocation
         WHERE
             en = ?;
-        ''', city
+        ''', (city, )
     ).fetchone()
     if query:
-        return Geolocation(name=query[0], lat=query[1], lon=query[2])
+        return Geolocation(name=query['ru'], lat=query['lat'], lon=query['lon'])
 
     logger.debug(f"Получен запрос на получение геолокации города {city}")
     url: str = r"http://api.openweathermap.org/geo/1.0/direct"
@@ -62,7 +71,7 @@ def geocode(city: str) -> Geolocation:
         '''
         INSERT INTO geolocation (en, ru, lat, lon)
         VALUES (?, ?, ?, ?)
-        ''', city, geolocation.name, geolocation.lat, geolocation.lon
+        ''', (city, geolocation.name, geolocation.lat, geolocation.lon, )
     )
     return geolocation
     
